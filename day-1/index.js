@@ -1,4 +1,3 @@
-import { read } from 'fs'
 import { readInput } from '../helpers.js'
 
 const inputPath = new URL('./input.txt', import.meta.url)
