@@ -5,6 +5,33 @@ const input = await readInput(inputPath)
 const inputArray = input.split('\n\n')
 const cleanedInput = inputArray.map((input) => input.replace(/\n/g, ' '))
 
+// Part 1
+let part1Valid = 0
+cleanedInput.forEach((input) => {
+  const hasBirthYear = input.includes('byr:')
+  const hasIssueYear = input.includes('iyr:')
+  const hasExpirationYear = input.includes('eyr:')
+  const hasHeight = input.includes('hgt:')
+  const hasHairColor = input.includes('hcl:')
+  const hasEyeColor = input.includes('ecl:')
+  const hasPassportID = input.includes('pid:')
+
+  if (
+    hasBirthYear &&
+    hasIssueYear &&
+    hasExpirationYear &&
+    hasHeight &&
+    hasHairColor &&
+    hasEyeColor &&
+    hasPassportID
+  ) {
+    part1Valid++
+  }
+})
+
+console.log(part1Valid)
+
+// Part 2
 const numberValidator = ({ min, max }) => (number) => {
   if (!min || !max || !number) {
     return false
@@ -46,7 +73,7 @@ const isPassportIDValid = (pid) => {
   return regex.test(pid)
 }
 
-let valid = 0
+let part2Valid = 0
 cleanedInput.forEach((input) => {
   const splitInput = input.split(' ')
   const passportObject = splitInput.reduce((obj, next) => {
@@ -72,8 +99,8 @@ cleanedInput.forEach((input) => {
     eyeColorValid &&
     passportIDValid
   ) {
-    valid++
+    part2Valid++
   }
 })
 
-console.log(valid)
+console.log(part2Valid)
