@@ -5,7 +5,7 @@ const input = await readInput(inputPath)
 const inputArray = input.split('\n')
 
 let mask
-const mem = []
+const mem = {}
 
 const setValue = (value) => {
 	const binary = value.toString(2).split('')
@@ -32,8 +32,7 @@ inputArray.forEach((input) => {
 })
 
 console.log(
-	mem
-		.filter((x) => x)
+	Object.values(mem)
 		.map((x) => parseInt(x, 2))
 		.reduce((a, b) => a + b)
 )
