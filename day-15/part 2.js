@@ -7,24 +7,30 @@ const inputArray = input.split(',').map(Number)
 const TARGET_NUM = 30000000
 const spokenNumbers = {}
 inputArray.forEach((num, i) => (spokenNumbers[num] = i + 1))
-let lastSpoken = {
+
+const lastSpoken = {
 	number: inputArray[inputArray.length - 1],
 	turn: inputArray.length,
+}
+const nextLastSpoken = {
+	number: null,
+	turn: null,
 }
 
 for (let i = inputArray.length + 1; i <= TARGET_NUM; i++) {
 	const spokenNumbersLastNumTurn = spokenNumbers[lastSpoken.number]
-	let nextLastSpoken = {}
 
 	if (!spokenNumbersLastNumTurn) {
-		nextLastSpoken = { number: 0, turn: i }
+		nextLastSpoken.number = 0
+		nextLastSpoken.turn = i
 	} else {
-		const nextNumber = lastSpoken.turn - spokenNumbersLastNumTurn
-		nextLastSpoken = { number: nextNumber, turn: i }
+		nextLastSpoken.number = lastSpoken.turn - spokenNumbersLastNumTurn
+		nextLastSpoken.turn = i
 	}
 
 	spokenNumbers[lastSpoken.number] = lastSpoken.turn
-	lastSpoken = nextLastSpoken
+	lastSpoken.number = nextLastSpoken.number
+	lastSpoken.turn = nextLastSpoken.turn
 }
 
 console.log(lastSpoken.number)
